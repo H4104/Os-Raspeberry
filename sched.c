@@ -25,6 +25,7 @@ void init_ctx(struct ctx_s* context, funct_t f, unsigned int size){
 void init_pcb(struct pcb_s* pcb, funct_t f, unsigned int size, void* args){
 	pcb->pcb_f = f;
 	pcb->pcb_args = args;
+	pcb->tempsAttente = 0;
 	struct ctx_s* ctx= phyAlloc_alloc(sizeof(struct ctx_s));
 	init_ctx(ctx,f,size);
 	pcb-> pcb_ctx= ctx;
@@ -88,7 +89,9 @@ void terminate_process(){
 }
 
 void elect(){
-	current_process = current_process->next_pcb;
+	while(current_process->tempsAttente>0){
+		current_process = current_process->next_pcb;
+	}
 }
 
 void start_sched(){
@@ -137,6 +140,7 @@ void ctx_switch_from_irq(){
 
 
 void __attribute__((naked)) ctx_switch(){
+	//TODO Caser une boucle qui décrémente le temps d'attente de tout le monde
 	if(current_process->state == NEW)
 	{
 		start_current_process();

@@ -20,6 +20,7 @@ struct ctx_s{
 struct pcb_s{
 	struct pcb_s* next_pcb;
 	void* pcb_args;
+	unsigned int tempsAttente;
 	funct_t pcb_f;
 	struct ctx_s* pcb_ctx;
 	State state;
