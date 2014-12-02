@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<meta charset="UTF-8" />
+<script type="text/javascript">var NREUMQ=NREUMQ||[];NREUMQ.push(["mark","firstbyte",new Date().getTime()]);</script>
+<title>BCM2835 datasheet errata - eLinux.org</title>
+<meta name="generator" content="MediaWiki 1.24alpha" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="/opensearch_desc.php" title="eLinux.org (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://elinux.org/api.php?action=rsd" />
+<link rel="copyright" href="http://creativecommons.org/licenses/by-sa/3.0/" />
+<link rel="alternate" type="application/atom+xml" title="eLinux.org Atom feed" href="/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://elinux.org/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.skinning.interface%7Cmediawiki.ui.button%7Cskins.vector.styles&amp;only=styles&amp;skin=vector&amp;*" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="http://elinux.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" />
+<style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: elinux:resourceloader:filter:minify-css:7:ce2ea8b61fdbcffeb01d2d7d8a6046d1 */</style>
+<script src="http://elinux.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script>if(window.mw){
+mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"BCM2835_datasheet_errata","wgTitle":"BCM2835 datasheet errata","wgCurRevisionId":342470,"wgRevisionId":342470,"wgArticleId":16460,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["BCM2835"],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"BCM2835_datasheet_errata","wgIsProbablyEditable":false,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgWikiEditorEnabledModules":{"toolbar":true,"dialogs":true,"hidesig":true,"preview":true,"previewDialog":false,"publish":true}});
+}</script><script>if(window.mw){
+mw.loader.implement("user.options",function($,jQuery){mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"editfont":"default","editondblclick":0,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":1,"extendwatchlist":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"imagesize":2,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nickname":"","norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"rcdays":7,"rclimit":50,"rows":25,"showhiddencats":0,"shownumberswatching":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":1,"watchdefault":1,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,
+"useeditwarning":1,"prefershttps":1,"lqtnotifytalk":false,"lqtdisplaydepth":5,"lqtdisplaycount":25,"lqtcustomsignatures":true,"lqt-watch-threads":true,"usebetatoolbar":1,"usebetatoolbar-cgd":1,"wikieditor-preview":1,"wikieditor-publish":1,"echo-notify-show-link":true,"echo-show-alert":true,"echo-email-frequency":0,"echo-email-format":"plain-text","echo-subscriptions-email-system":true,"echo-subscriptions-web-system":true,"echo-subscriptions-email-user-rights":true,"echo-subscriptions-web-user-rights":true,"echo-subscriptions-email-other":false,"echo-subscriptions-web-other":true,"echo-subscriptions-email-edit-user-talk":false,"echo-subscriptions-web-edit-user-talk":true,"echo-subscriptions-email-reverted":false,"echo-subscriptions-web-reverted":true,"echo-subscriptions-email-article-linked":false,"echo-subscriptions-web-article-linked":false,"echo-subscriptions-email-mention":false,"echo-subscriptions-web-mention":true,"language":"en","variant-gan":"gan","variant-iu":"iu","variant-kk":
+"kk","variant-ku":"ku","variant-shi":"shi","variant-sr":"sr","variant-tg":"tg","variant-uz":"uz","variant-zh":"zh","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false,"searchNs90":false,"searchNs91":false,"searchNs92":false,"searchNs93":false,"searchNs500":false,"searchNs501":false,"searchNs502":false,"searchNs503":false,"searchNs504":false,"searchNs505":false,"searchNs506":false,"searchNs507":false,"searchNs828":false,"searchNs829":false,"variant":"en"});},{},{});mw.loader.implement("user.tokens",function($,jQuery){mw.user.tokens.set({"editToken":"+\\","patrolToken":false,"watchToken":false});},{},{});
+/* cache key: elinux:resourceloader:filter:minify-js:7:e3b0ac1c6250e06683d5da90a751545c */
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.page.startup","mediawiki.legacy.wikibits","mediawiki.legacy.ajax","skins.vector.js"]);
+}</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/Vector/csshover.min.htc")}</style><![endif]-->
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-BCM2835_datasheet_errata skin-vector action-view vector-animateLayout">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+
+			<div id="mw-js-message" style="display:none;"></div>
+							<div id="siteNotice"><div id="localNotice" lang="en" dir="ltr"></div></div>
+						<h1 id="firstHeading" class="firstHeading" lang="en"><span dir="auto">BCM2835 datasheet errata</span></h1>
+						<div id="bodyContent" class="mw-body-content">
+									<div id="siteSub">From eLinux.org</div>
+								<div id="contentSub"></div>
+												<div id="jump-to-nav" class="mw-jump">
+					Jump to:					<a href="#mw-navigation">navigation</a>, 					<a href="#p-search">search</a>
+				</div>
+				<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><p><br />
+Back to <a href="/RPi_Hardware#Components" title="RPi Hardware">RPi_Hardware#Components</a>
+</p><p><br />
+</p>
+<div id="toc" class="toc"><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#BCM_2835_datasheet_errata"><span class="tocnumber">1</span> <span class="toctext">BCM 2835 datasheet errata</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="#the_BCM2835_on_the_RPI"><span class="tocnumber">1.1</span> <span class="toctext">the BCM2835 on the RPI</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="#PDF_Generation"><span class="tocnumber">1.2</span> <span class="toctext">PDF Generation</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="#p7_footnote_typo"><span class="tocnumber">1.3</span> <span class="toctext">p7 footnote typo</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#p8"><span class="tocnumber">1.4</span> <span class="toctext">p8</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#p10"><span class="tocnumber">1.5</span> <span class="toctext">p10</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="#p12"><span class="tocnumber">1.6</span> <span class="toctext">p12</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="#p13"><span class="tocnumber">1.7</span> <span class="toctext">p13</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="#p14"><span class="tocnumber">1.8</span> <span class="toctext">p14</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="#p17"><span class="tocnumber">1.9</span> <span class="toctext">p17</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="#p24_table"><span class="tocnumber">1.10</span> <span class="toctext">p24 table</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="#p25_table"><span class="tocnumber">1.11</span> <span class="toctext">p25 table</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="#p26"><span class="tocnumber">1.12</span> <span class="toctext">p26</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="#p34_off-by-one.3F"><span class="tocnumber">1.13</span> <span class="toctext">p34 off-by-one?</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="#p35_I2C_clock_stretching"><span class="tocnumber">1.14</span> <span class="toctext">p35 I2C clock stretching</span></a></li>
+<li class="toclevel-2 tocsection-16"><a href="#p38_typo"><span class="tocnumber">1.15</span> <span class="toctext">p38 typo</span></a></li>
+<li class="toclevel-2 tocsection-17"><a href="#p52_error"><span class="tocnumber">1.16</span> <span class="toctext">p52 error</span></a></li>
+<li class="toclevel-2 tocsection-18"><a href="#p92_to_95_.26_102_to_103"><span class="tocnumber">1.17</span> <span class="toctext">p92 to 95 &amp; 102 to 103</span></a></li>
+<li class="toclevel-2 tocsection-19"><a href="#p90"><span class="tocnumber">1.18</span> <span class="toctext">p90</span></a></li>
+<li class="toclevel-2 tocsection-20"><a href="#p95"><span class="tocnumber">1.19</span> <span class="toctext">p95</span></a></li>
+<li class="toclevel-2 tocsection-21"><a href="#p96"><span class="tocnumber">1.20</span> <span class="toctext">p96</span></a></li>
+<li class="toclevel-2 tocsection-22"><a href="#p100_typo"><span class="tocnumber">1.21</span> <span class="toctext">p100 typo</span></a></li>
+<li class="toclevel-2 tocsection-23"><a href="#p102_typos"><span class="tocnumber">1.22</span> <span class="toctext">p102 typos</span></a></li>
+<li class="toclevel-2 tocsection-24"><a href="#p103_typo"><span class="tocnumber">1.23</span> <span class="toctext">p103 typo</span></a></li>
+<li class="toclevel-2 tocsection-25"><a href="#p104_table"><span class="tocnumber">1.24</span> <span class="toctext">p104 table</span></a></li>
+<li class="toclevel-2 tocsection-26"><a href="#p105_table"><span class="tocnumber">1.25</span> <span class="toctext">p105 table</span></a></li>
+<li class="toclevel-2 tocsection-27"><a href="#p111_spelling"><span class="tocnumber">1.26</span> <span class="toctext">p111 spelling</span></a></li>
+<li class="toclevel-2 tocsection-28"><a href="#p119_I2S_clock"><span class="tocnumber">1.27</span> <span class="toctext">p119 I2S clock</span></a></li>
+<li class="toclevel-2 tocsection-29"><a href="#p125"><span class="tocnumber">1.28</span> <span class="toctext">p125</span></a></li>
+<li class="toclevel-2 tocsection-30"><a href="#p126"><span class="tocnumber">1.29</span> <span class="toctext">p126</span></a></li>
+<li class="toclevel-2 tocsection-31"><a href="#p141"><span class="tocnumber">1.30</span> <span class="toctext">p141</span></a></li>
+<li class="toclevel-2 tocsection-32"><a href="#p142.2F143_register_table"><span class="tocnumber">1.31</span> <span class="toctext">p142/143 register table</span></a></li>
+<li class="toclevel-2 tocsection-33"><a href="#p153"><span class="tocnumber">1.32</span> <span class="toctext">p153</span></a></li>
+<li class="toclevel-2 tocsection-34"><a href="#p155"><span class="tocnumber">1.33</span> <span class="toctext">p155</span></a></li>
+<li class="toclevel-2 tocsection-35"><a href="#p156"><span class="tocnumber">1.34</span> <span class="toctext">p156</span></a></li>
+<li class="toclevel-2 tocsection-36"><a href="#p158"><span class="tocnumber">1.35</span> <span class="toctext">p158</span></a></li>
+<li class="toclevel-2 tocsection-37"><a href="#p160"><span class="tocnumber">1.36</span> <span class="toctext">p160</span></a></li>
+<li class="toclevel-2 tocsection-38"><a href="#p175"><span class="tocnumber">1.37</span> <span class="toctext">p175</span></a></li>
+<li class="toclevel-2 tocsection-39"><a href="#p177"><span class="tocnumber">1.38</span> <span class="toctext">p177</span></a></li>
+<li class="toclevel-2 tocsection-40"><a href="#p196"><span class="tocnumber">1.39</span> <span class="toctext">p196</span></a></li>
+<li class="toclevel-2 tocsection-41"><a href="#p197"><span class="tocnumber">1.40</span> <span class="toctext">p197</span></a></li>
+<li class="toclevel-2 tocsection-42"><a href="#p198"><span class="tocnumber">1.41</span> <span class="toctext">p198</span></a></li>
+<li class="toclevel-2 tocsection-43"><a href="#p202"><span class="tocnumber">1.42</span> <span class="toctext">p202</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h1><span class="mw-headline" id="BCM_2835_datasheet_errata">BCM 2835 datasheet errata</span></h1>
+<p>The (partial) datasheet was published here: <a rel="nofollow" class="external text" href="http://www.raspberrypi.org/wp-content/uploads/2012/02/BCM2835-ARM-Peripherals.pdf">at raspberrypi.org</a> and <a rel="nofollow" class="external text" href="http://dmkenr5gtnd8f.cloudfront.net/wp-content/uploads/2012/02/BCM2835-ARM-Peripherals.pdf">a mirror</a>
+</p><p>It has a couple of typos. Some more serious than others. 
+</p><p>Let's gather those datasheet typos and errors here. 
+</p><p>The quality of the datasheet is high. It looks like it contains the information that programmers need. 
+Some of the tables from the datasheet have been reproduced <a href="/RPi_BCM2835_GPIOs" title="RPi BCM2835 GPIOs">here</a>.
+</p><p>It also "does the right thing" with reserved bits. Many datasheets specify "write: don't care, read as zeroes". Broadcom specifies the reserved bits the other way around: "Write zeroes, read: don't care". 
+</p><p>This is the correct way to do it. If you expand the hardware the hardware may be enhanced and do "different things" if you write ones to the previously "reserved" bits. If you follow the datasheet, and write zeroes as specified to the reserved bits, the hardware guys can make sure you're not going to run into surprises. And by specifying "read: don't care" you can allow future hardware to provide status bits there. 
+</p>
+<h2><span class="mw-headline" id="the_BCM2835_on_the_RPI">the BCM2835 on the RPI</span></h2>
+<p>Not really an erratum, but not worth it to make a whole page for this. 
+The Raspberry Pi runs the BCM2835 with a core clock of 250MHz. This is relevant for the peripheral modules like I2C, SPI and Timer ( ARM side ) for calculating the desired clock rate. The I2C section on page 34 mentions 150MHz as a "nominal core clock".
+</p>
+<h2><span class="mw-headline" id="PDF_Generation">PDF Generation</span></h2>
+<p>Switch on option for linking, so cross-references and table of contents can be jumped through.
+(<a href="/RPi_BCM2835_GPIOs" title="RPi BCM2835 GPIOs">RPi_BCM2835_GPIOs</a> contains some useful cross-references)
+</p>
+<h2><span class="mw-headline" id="p7_footnote_typo">p7 footnote typo</span></h2>
+<p>precuations should be precautions.
+</p>
+<h2><span class="mw-headline" id="p8">p8</span></h2>
+<p>The register names are AUX_SPI0_.... and AUX_SPI1_.... . The "description" is then SPI 1 ... and SPI 2 ....
+</p><p>These modules are in fact SPI1 and SPI2, and NOT SPI0 and SPI1. This is confusing as indeed there is a different module called SPI0 (documented on page 148 and onwards).
+</p>
+<h2><span class="mw-headline" id="p10">p10</span></h2>
+<p>It says "Al 16550 register bits" when it should say "All 16550 register bits"
+</p>
+<h2><span class="mw-headline" id="p12">p12</span></h2>
+<p>The title should be AUX_MU_IER_REG.  The name in the Synopsis is correct
+</p><p>These are R/W bits not read only
+</p><p>Bits 3:2 are marked as don't care, but are actually required in order to receive interrupts.
+</p><p>Bits 1:0 are swaped. bit 0 is receive interrupt and bit 1 is transmit.
+</p>
+<h2><span class="mw-headline" id="p13">p13</span></h2>
+<p>The title should be AUX_MU_IIR_REG.  The name in the Synopsis is correct
+</p>
+<h2><span class="mw-headline" id="p14">p14</span></h2>
+<p>LCR register, bit 1 must be set for 8 bit mode, like a 16550 write a 3 to get 8-bit mode
+</p>
+<h2><span class="mw-headline" id="p17">p17</span></h2>
+<p>The receiver enable and transmitter enable sections don't match the description in the AUX_MU_CNTL_REG table. They should both read "If this bit <b>cleared</b> no new symbols will be..."
+</p>
+<h2><span class="mw-headline" id="p24_table">p24 table</span></h2>
+<p>Either the reserved bits at the top are too few or a field is missing.
+</p><p>With the reserved bits fixed it looks like this:
+</p>
+<table border="1">
+<tr>
+<th> Bit(s) </th>
+<th> Field Name </th>
+<th> Description </th>
+<th> type</th>
+<th> reset
+</th></tr>
+<tr>
+<td> 31:11 </td>
+<td> - </td>
+<td> Reserved, write zero, read as don’t care </td>
+<td>  </td>
+<td>
+</td></tr>
+<tr>
+<td> 10:8  </td>
+<td> CS high time </td>
+<td> Additional SPI clock cycles where the CS is high. </td>
+<td> R/W </td>
+<td> 0
+</td></tr>
+<tr>
+<td> 7  </td>
+<td> TX empty IRQ  </td>
+<td> If 1 the interrupt line is high when the transmit FIFO is empty </td>
+<td> R/W </td>
+<td> 0
+</td></tr>
+<tr>
+<td> 6 </td>
+<td> Done IRQ </td>
+<td> If 1 the interrupt line is high when the interface is idle </td>
+<td> R/W </td>
+<td> 0
+</td></tr>
+<tr>
+<td> 5:2  </td>
+<td> -  </td>
+<td> Reserved, write zero, read as don’t care </td>
+<td>  </td>
+<td>
+</td></tr>
+<tr>
+<td> 1 </td>
+<td> Shift in MS bit first </td>
+<td> If 1 the data is shifted in starting with the MS bit. (bit 15) If 0 the data is shifted in starting with the LS bit. (bit 0) </td>
+<td> R/W </td>
+<td> 0
+</td></tr>
+<tr>
+<td> 0  </td>
+<td> Keep input </td>
+<td> If 1 the receiver shift register is NOT cleared. Thus new data is concatenated to old data. If 0 the receiver shift register is cleared before each transaction. </td>
+<td> R/W </td>
+<td> 0
+</td></tr>
+</table>
+<h2><span class="mw-headline" id="p25_table">p25 table</span></h2>
+<p>"AUX is IDLE:" should read "SPI is idle". (and for consistency below the line "Interrupts", SPI is Idle should be spelled "SPI is idle". 
+</p><p>The table on page 25 has the bit numbers wrong. Some bits are mentioned twice, some not at all. 
+</p><p>I'm guessing it should be something like: 
+</p>
+<table border="1">
+<tr>
+<th> Bit(s) </th>
+<th> Field Name </th>
+<th> Description </th>
+<th> type</th>
+<th> reset
+</th></tr>
+<tr>
+<td> 31:24 </td>
+<td> TX FIFO level </td>
+<td>  The number of data units in the transmit data FIFO </td>
+<td> R/W </td>
+<td> 0
+</td></tr>
+<tr>
+<td> 23:16  </td>
+<td> RX FIFO level </td>
+<td>  The number of data units in the receive data FIFO.  </td>
+<td> R/W </td>
+<td> 0
+</td></tr>
+<tr>
+<td> 15:10  </td>
+<td> -  </td>
+<td> Reserved, write zero, read as don’t care </td>
+<td> R/W </td>
+<td> 0
+</td></tr>
+<tr>
+<td> 9 </td>
+<td> TX Full </td>
+<td> If 1 the transmit FIFO is full <br />If 0 the transmit FIFO can accept at least 1 data unit. </td>
+<td> R/W </td>
+<td> 0
+</td></tr>
+<tr>
+<td> 8  </td>
+<td> TX Empty  </td>
+<td> If 1 the transmit FIFO is empty R/W 0 <br /> If 0 the transmit FIFO holds at least 1 data unit. </td>
+<td> R/W </td>
+<td> 0
+</td></tr>
+<tr>
+<td> 7 </td>
+<td> RX Empty  </td>
+<td> If 1 the receiver FIFO is empty R/W 0 <br /> If 0 the receiver FIFO holds at least 1 data unit. </td>
+<td> R/W </td>
+<td> 0
+</td></tr>
+<tr>
+<td> 6  </td>
+<td> Busy  </td>
+<td> Indicates the module is busy transferring data. </td>
+<td> R/W </td>
+<td> 0
+</td></tr>
+<tr>
+<td> 5:0  </td>
+<td> Bit count  </td>
+<td> The number of bits still to be processed. Starts with           'shift-length' and counts down.  </td>
+<td> R/W </td>
+<td> 0
+</td></tr>
+</table>
+<p><br />
+The register reads as 0x280 after reset. Two bits high would be consistent with TX empty and RX empty. However, bits 7 and 9 does not match the original datasheet, nor my guess.....
+</p>
+<h2><span class="mw-headline" id="p26">p26</span></h2>
+<p>The Peek register is documented here as being at 0x7e21508c, whereas the table on page 8 shows 0x7e215094.
+</p><p>The IO register is documented as 0x7e2150a0 (with automatic deassert) and 0x7e2150b0, whereas the table on page 8 shows 0x7e215090.
+</p>
+<h2><span class="mw-headline" id="p34_off-by-one.3F">p34 off-by-one?</span></h2>
+<p>I strongly suspect that the CDIV counter is only 14 bits wide. The bottom bit doesn't work as per specifications, and because the "0" results in 32768, the top bit doesn't either. An easy implementation would implement the 0 value as the maximum divisor. Not as "half the maximum". 
+</p><p>Another option is that SCL = cor clock * 2 / CDIV and that the counter is 15 bits after all. (only the lowest bit missing).
+</p>
+<h2><span class="mw-headline" id="p35_I2C_clock_stretching">p35 I2C clock stretching</span></h2>
+<p>There is a bug in the I2C master that it does not support clock stretching at arbitrary points.
+It does support clock stretching in I2C-Reads directly after the ACK phase, if the stretching-delay is &gt;= 0.5 clock period (i.e. the low-period is &gt;= 1 clock period).
+</p><p>See: <a rel="nofollow" class="external free" href="http://www.raspberrypi.org/phpBB3/viewtopic.php?f=44&amp;t=13771">http://www.raspberrypi.org/phpBB3/viewtopic.php?f=44&amp;t=13771</a>
+</p><p>A detailed analysis of this bug can be found at <a rel="nofollow" class="external free" href="http://www.advamation.com/knowhow/raspberrypi/rpi-i2c-bug.html">http://www.advamation.com/knowhow/raspberrypi/rpi-i2c-bug.html</a>
+</p>
+<h2><span class="mw-headline" id="p38_typo">p38 typo</span></h2>
+<p>harware instead of hardware (second paragraph)
+</p>
+<h2><span class="mw-headline" id="p52_error">p52 error</span></h2>
+<p>INTEN: a DMA interrupts only get triggered when the control block requesting the interrupt is the last in the chain (so next is NULL).
+</p><p>Otherwise no interrupt gets triggered.
+</p><p>Workaround is to use a second DMA chain just for triggering the interrupt.
+</p><p>To do this one needs to create a control-block (possibly length=0) on the second DMA channel.
+Link to it via two control blocks on the primary chain.
+The first control block sets the control-block_address of the "second DMA".
+The second starts the "unused" DMA by writing 1 to CS of the "second DMA", which then starts the "second DMA" and subsequently  
+the interrupt gets triggered.
+After this the "primary" DMA can continue its work with other transfers without further interaction by the CPU.
+</p>
+<h2><span class="mw-headline" id="p92_to_95_.26_102_to_103">p92 to 95 &amp; 102 to 103</span></h2>
+<p>The GPIO Alternate function select Registers. This shows a bit pattern of 111 as alternative function 3. If you look at the values after boot up the Pi's SPI interface pins connected to the SD card have this value in them. This does not match the diagram on page 102 - 103 which shows this function is selected with alternative function 4. So either the bit pattern / function information is wrong or Table 6-31 is wrong.
+</p>
+<h2><span class="mw-headline" id="p90">p90</span></h2>
+<p>address 0x7e20 0000 is listed twice as gpfsel0.
+</p>
+<h2><span class="mw-headline" id="p95">p95</span></h2>
+<p>There is a spurious ) in "..clear registers) are used..."
+</p>
+<h2><span class="mw-headline" id="p96">p96</span></h2>
+<p>Instead of "1 = Set GPIO pin n" for GPIO Output Clear Register 1, it should be "1 = Clear GPIO pin n"
+</p><p>The level registers have "0 = GPIO pin n is HIGH" which should be "1 = GPIO pin n is HIGH"
+</p><p>The level registers are listed as R/W but the table on page 90 states that they are only readable, which makes more sense.
+</p>
+<h2><span class="mw-headline" id="p100_typo">p100 typo</span></h2>
+<p>Instead of "when all register contents is lost." it should say "when all register contents are lost."
+</p>
+<h2><span class="mw-headline" id="p102_typos">p102 typos</span></h2>
+<p>Instead of "Up to 6 alternate function are" it should say "Up to 6 alternate functions are"
+</p><p>Instead of "a quick over view." it should say "a quick overview."
+</p>
+<h2><span class="mw-headline" id="p103_typo">p103 typo</span></h2>
+<p>In the "BSCSL SDA / MOSI" row of the "Special function legend" table, it says "salve" instead of "slave"
+</p><p>Where it says "BSC ISP slave" it should actually say "BSC/SPI slave"
+</p>
+<h2><span class="mw-headline" id="p104_table">p104 table</span></h2>
+<p>The table, legend for table 6-31, started on page 103 shows twice in red: TXD0, RXD0, CTS0, RTS0.  The second block, with functions starting: UART 1 should be: TXD1, RXD1, CTS1, RTS1.
+</p><p>The table, legend for table 6-31, has no mention of any of the SD1_x functions included in the previous table
+</p>
+<h2><span class="mw-headline" id="p105_table">p105 table</span></h2>
+<p>In table 6-32 the values in columns "min output freq" and "max output freq" should be in each others. That is the values in column "min output freq" are the maximum output frequency values and the values in column "max output freq" are the minimum output frequency values [check: source/(DIVI) &gt; source/(DIVI+1) as dividing by a larger value yields a smaller result!].
+</p>
+<h2><span class="mw-headline" id="p111_spelling">p111 spelling</span></h2>
+<p>top line: device should be devise.
+</p>
+<h2><span class="mw-headline" id="p119_I2S_clock">p119 I2S clock</span></h2>
+<p>Allusions to the <i>APB clock domain</i> are made. However the exact speed of the APB clock is never explained.
+</p><p><a rel="nofollow" class="external free" href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.ddi0301h/Cbaifdib.html">http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.ddi0301h/Cbaifdib.html</a> explains "APB" as the Advanced Peripheral Bus, but that doesn't help much either.
+</p>
+<h2><span class="mw-headline" id="p125">p125</span></h2>
+<p>Perhaps "There is only PCM module in the BCM2835." is supposed to be "There is only one PCM module in the BCM2835."&#160;?
+</p>
+<h2><span class="mw-headline" id="p126">p126</span></h2>
+<p>There is amiguity on what register bits can be modified while the I2S system is active. p126 states that only the bottom three bits of CS_A can be modified. However p122 suggests to use the SYNC bit in CS_A for waiting. Does this mean, that the SYNC bit can also be changed at runtime as well?
+</p>
+<h2><span class="mw-headline" id="p141">p141</span></h2>
+<p>There is no base address listed for this register block.
+Should be: 0x7E20C000
+</p>
+<h2><span class="mw-headline" id="p142.2F143_register_table">p142/143 register table</span></h2>
+<p>The CTL register controls both PWM channels 1 and 2, but in the description column, only channel 1 is mentioned. Bits 8 to 15, PWEN2 to MSEN2 should be described as controlling PWM channel 2, not 1. (I think- not confirmed)
+</p>
+<h2><span class="mw-headline" id="p153">p153</span></h2>
+<p>Typo: wrirng -&gt; writing.
+</p><p>Near the bottom of the page RXR. This bit would be useful if it signified more than half full. There is a space in "( full)" that would hint at that the word "half" was taken away. Another hint is that it says that the bit clears when "sufficient" data is read from the FIFO. The word sufficient is redundant when this is the "full and active" bit. 
+</p><p>The way it is written now, this bit is just the same as bit RXF, except that the TA bit is anded into this one. 
+</p><p>Two options. The hardware was changed (detecting "half full" was difficult?) and the documentation was changed accordingly. Or the hardware does what I expect: set this bit when more than half full.
+</p>
+<h2><span class="mw-headline" id="p155">p155</span></h2>
+<p>There is a CSPOL bit described here, wereas there are also CSPOL[0,1,2] described on page 153. How do these combine???
+( I dunno the official answer to this, but the community-written SPI drivers <a rel="nofollow" class="external text" href="https://github.com/raspberrypi/linux/blob/rpi-3.12.y/drivers/spi/spi-bcm2708.c#L273">here</a> and <a rel="nofollow" class="external text" href="https://github.com/raspberrypi/linux/blob/rpi-3.12.y/drivers/spi/spi-bcm2835.c#L211">here</a> set them both at the same time )
+</p><p>If CLEAR_TX_FIFO is set there is at least a slight chance (~4%) that a selected CS will get de-asserted for a short period of time (&lt;63ns). This may happen every time this bit is set, but it is not measurable every time when sampling at 16MHz (higher sampling speeds would be needed to confirm that).
+Testing shows that CLEAR_RX_FIFO set alone does not exhibit such behavior.
+</p><p>Potential workaround is to assign CS as the "reserved" chip_select 3 and toggling the corresponding CSPOL pin for the cs that is really in use.
+</p>
+<pre># assume the cs you want to set is in cs
+cs^=(1&lt;&lt;(cs&amp;0x03+21);
+cs|=0x03|CLEAR_FIFO_RX|CLEAR_FIFO_TX;
+writel(cs,0x7E204000);
+</pre>
+<p>It is not fully confirmed, if this does not introduce other glitches...
+</p>
+<h2><span class="mw-headline" id="p156">p156</span></h2>
+<p>The CDIV value is documented as "must be a power of 2". This is not true. I can perfectly set the register to 833 (not a power of 2) and get 250MHz/833 = 300kHz. 
+</p><p>Maybe "must be a multiple of 2" was meant???
+</p>
+<h2><span class="mw-headline" id="p158">p158</span></h2>
+<p>SPI_FIFO is misspelled as SPIFIFO in the last line of 10.6.2.
+</p><p>10.6.3: The presented flow works in principle.
+But there are some limitations:
+</p>
+<ul><li> ADCS is required to be set (not optional as per j )- otherwise no SPI-Clock shows on pins</li>
+<li> also the "described" first 4 byte of the transfer described in l-i) also impact the other bits of CS besides the 8 bit that can get set with this transfer - so the CSPolarity for all 3 chip selects get reset to 0.</li>
+<li> TX/RX fifos have to be reset if there was an earlier transfer of say 3 bytes in length via DMA.</li></ul>
+<p>In this example there is still 1 byte left which will get sent first.
+</p><p>The way around this is to configure CS, CDIV and DLAN via explicit DMA control blocks and only then do the RX/TX DMAs (always making use of the WAIT_RESPONSE flag in the DMA config register!).
+Note that using TDMODE for setting LEN and CS in one transfer may result in a reordering of the writes, which will start the SPI device before the lenght is set, so the original register value is used.
+Note also that it is NOT recommended resetting FIFO while starting SPI by setting TA Flag in SPI_CS. Under rare situations this may result in "lost" clocks while MOSI still shifts out the data! (so resetting FIFO needs another DMA control-block prior to setting DLEN and CS)
+</p>
+<h2><span class="mw-headline" id="p160">p160</span></h2>
+<p>"The BCS controller" should be "The BSC controller"
+</p><p>"The registers base addresses is" -&gt; "The registers' base addresses are" or "The base address of the registers is".
+</p>
+<h2><span class="mw-headline" id="p175">p175</span></h2>
+<p>top line. Two typos: 
+</p>
+<pre>On mini UART and and PL011 UART
+</pre>
+<p>should be
+</p>
+<pre>One mini UART and one PL011 UART
+</pre>
+<h2><span class="mw-headline" id="p177">p177</span></h2>
+<p>13.4 register view
+</p><p>First line:
+</p>
+<pre>The PL011 USRT is mapped on base adderss
+</pre>
+<p>should be:
+</p>
+<pre>The PL011 UART is mapped on base address
+</pre>
+<p>The base address is listed as 0x7e20100 . This should be 0x7e201000.
+</p>
+<h2><span class="mw-headline" id="p196">p196</span></h2>
+<p>SP804 not AP804
+</p>
+<h2><span class="mw-headline" id="p197">p197</span></h2>
+<p>bit 1, 32 bit counter not 23 bit counter
+</p>
+<h2><span class="mw-headline" id="p198">p198</span></h2>
+<p>neither are register 0x40C raw is 0x410, masked is 0x414
+</p>
+<h2><span class="mw-headline" id="p202">p202</span></h2>
+<p>The last entry of section 15.1. 
+</p><p>The entries in the table should specify the choice that Broadcom made when instantiating the USB controller IP from Synopsys. 
+</p><p>Possibly the "choice" hasn't been specified. Or maybe the "0=32, 1..5=512, 6,7=768" is the option that was chosen?
+</p><p><br />
+"Video core bus structure" should be "VideoCore bus structure"
+</p>
+<!-- 
+NewPP limit report
+CPU time usage: 0.060 seconds
+Real time usage: 0.140 seconds
+Preprocessor visited node count: 171/1000000
+Preprocessor generated node count: 176/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key elinux:pcache:idhash:16460-0!*!0!!en!*!* and timestamp 20140730172529 and revision id 342470
+ -->
+</div>									<div class="printfooter">
+						Retrieved from "<a dir="ltr" href="http://elinux.org/index.php?title=BCM2835_datasheet_errata&amp;oldid=342470">http://elinux.org/index.php?title=BCM2835_datasheet_errata&amp;oldid=342470</a>"					</div>
+													<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="/Category:BCM2835" title="Category:BCM2835">BCM2835</a></li></ul></div></div>												<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Navigation menu</h2>
+
+			<div id="mw-head">
+									<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+						<h3 id="p-personal-label">Personal tools</h3>
+						<ul>
+							<li id="pt-createaccount"><a href="/index.php?title=Special:UserLogin&amp;returnto=BCM2835+datasheet+errata&amp;type=signup">Create account</a></li><li id="pt-login"><a href="/index.php?title=Special:UserLogin&amp;returnto=BCM2835+datasheet+errata" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>						</ul>
+					</div>
+									<div id="left-navigation">
+										<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+						<h3 id="p-namespaces-label">Namespaces</h3>
+						<ul>
+															<li  id="ca-nstab-main" class="selected"><span><a href="/BCM2835_datasheet_errata"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+															<li  id="ca-talk" class="new"><span><a href="/index.php?title=Talk:BCM2835_datasheet_errata&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t">Discussion</a></span></li>
+													</ul>
+					</div>
+										<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+						<h3 id="mw-vector-current-variant">
+													</h3>
+
+						<h3 id="p-variants-label"><span>Variants</span><a href="#"></a></h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+									</div>
+				<div id="right-navigation">
+										<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+						<h3 id="p-views-label">Views</h3>
+						<ul>
+															<li id="ca-view" class="selected"><span><a href="/BCM2835_datasheet_errata" >Read</a></span></li>
+															<li id="ca-viewsource"><span><a href="/index.php?title=BCM2835_datasheet_errata&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+															<li id="ca-history" class="collapsible"><span><a href="/index.php?title=BCM2835_datasheet_errata&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+													</ul>
+					</div>
+										<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label">
+						<h3 id="p-cactions-label"><span>More</span><a href="#"></a></h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+										<div id="p-search" role="search">
+						<h3>
+							<label for="searchInput">Search</label>
+						</h3>
+
+						<form action="/index.php" id="searchform">
+														<div id="simpleSearch">
+															<input type="search" name="search" placeholder="Search" title="Search eLinux.org [f]" accesskey="f" id="searchInput" /><input type="hidden" value="Special:Search" name="title" /><input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton mw-fallbackSearchButton" /><input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchButton" class="searchButton" />								</div>
+						</form>
+					</div>
+									</div>
+			</div>
+			<div id="mw-panel">
+				<div id="p-logo" role="banner"><a style="background-image: url(/images/6/68/Logo_clear.png);" href="/Main_Page"  title="Visit the main page"></a></div>
+						<div class="portal" role="navigation" id='p-Navigation' aria-labelledby='p-Navigation-label'>
+			<h3 id='p-Navigation-label'>Navigation</h3>
+
+			<div class="body">
+									<ul>
+													<li id="n-mainpage"><a href="/Main_Page" title="Visit the main page [z]" accesskey="z">Main Page</a></li>
+													<li id="n-portal"><a href="/eLinux.org:Community_portal" title="About the project, what you can do, where to find things">Community portal</a></li>
+													<li id="n-currentevents"><a href="/eLinux.org:Current_events" title="Find background information on current events">Current events</a></li>
+													<li id="n-recentchanges"><a href="/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+													<li id="n-help"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents" title="The place to find out">Help</a></li>
+													<li id="n-Volunteering"><a href="/Sitesupport-url">Volunteering</a></li>
+													<li id="n-Popular-Pages"><a href="/Special:PopularPages">Popular Pages</a></li>
+													<li id="n-Who.27s-Online"><a href="/Special:WhosOnline">Who's Online</a></li>
+											</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-tb' aria-labelledby='p-tb-label'>
+			<h3 id='p-tb-label'>Tools</h3>
+
+			<div class="body">
+									<ul>
+													<li id="t-whatlinkshere"><a href="/Special:WhatLinksHere/BCM2835_datasheet_errata" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+													<li id="t-recentchangeslinked"><a href="/Special:RecentChangesLinked/BCM2835_datasheet_errata" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+													<li id="t-specialpages"><a href="/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+													<li id="t-print"><a href="/index.php?title=BCM2835_datasheet_errata&amp;printable=yes" rel="alternate" title="Printable version of this page [p]" accesskey="p">Printable version</a></li>
+													<li id="t-permalink"><a href="/index.php?title=BCM2835_datasheet_errata&amp;oldid=342470" title="Permanent link to this revision of the page">Permanent link</a></li>
+													<li id="t-info"><a href="/index.php?title=BCM2835_datasheet_errata&amp;action=info">Page information</a></li>
+											</ul>
+							</div>
+		</div>
+				</div>
+		</div>
+		<div id="footer" role="contentinfo">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 25 July 2014, at 13:31.</li>
+											<li id="footer-info-viewcount">This page has been accessed 60,302 times.</li>
+											<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="http://creativecommons.org/licenses/by-sa/3.0/">a Creative Commons Attribution-ShareAlike 3.0 Unported License</a> unless otherwise noted.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/eLinux.org:Privacy_policy" title="eLinux.org:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/eLinux.org:About" title="eLinux.org:About">About eLinux.org</a></li>
+											<li id="footer-places-disclaimer"><a href="/eLinux.org:General_disclaimer" title="eLinux.org:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+											<li id="footer-copyrightico">
+															<a href="http://creativecommons.org/licenses/by-sa/3.0/"><img src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" alt="a Creative Commons Attribution-ShareAlike 3.0 Unported License" width="88" height="31" /></a>
+													</li>
+											<li id="footer-poweredbyico">
+															<a href="//www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+													</li>
+									</ul>
+						<div style="clear:both"></div>
+		</div>
+		<script>/*<![CDATA[*/window.jQuery && jQuery.ready();/*]]>*/</script><script>if(window.mw){
+mw.loader.state({"site":"loading","user":"ready","user.groups":"ready"});
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.toc","mediawiki.action.view.postEdit","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.searchSuggest"],null,true);
+}</script>
+<script src="http://elinux.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*"></script>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-119847-6");
+pageTracker._trackPageview();
+} catch(err) {}
+</script><script>if(window.mw){
+mw.config.set({"wgBackendResponseTime":250});
+}</script>
+	<script type="text/javascript">if(!NREUMQ.f){NREUMQ.f=function(){NREUMQ.push(["load",new Date().getTime()]);var e=document.createElement("script");e.type="text/javascript";e.src=(("http:"===document.location.protocol)?"http:":"https:")+"//"+"js-agent.newrelic.com/nr-100.js";document.body.appendChild(e);if(NREUMQ.a)NREUMQ.a();};NREUMQ.a=window.onload;window.onload=NREUMQ.f;};NREUMQ.push(["nrfj","beacon-1.newrelic.com","d0863ed20c","1648593","ZwQGZkEAWUBZU0ZQWV5OMUBaTl5dXFVKF0ZYEQ==",0,338,new Date().getTime(),"","","","",""]);</script>
+</body>
+</html>
+	
