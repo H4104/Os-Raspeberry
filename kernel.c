@@ -1,4 +1,4 @@
-#include "sched.h"
+#include "sched_PRR.h"
 #include "hw.h"
 
 
@@ -14,9 +14,11 @@ void funcA() {
 }
 void funcB(){
 	int	cptB = 1;
-	while( cptB < 2 ) {
+	while( 1 ) {
 			cptB += 2 ;
-			
+			if(cptB>150000000){
+				cptB=0;
+			}
 		
 	}
 }
