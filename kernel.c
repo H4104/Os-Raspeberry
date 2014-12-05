@@ -13,11 +13,12 @@ void funcA() {
 	}
 }
 void funcB(){
-	int	cptB = 1;
-	while( cptB < 2 ) {
-			cptB += 2 ;
-			
-		
+	int	cptb = 1;
+	while( 1 ) {
+		cptb ++;
+		if(cptb>1500000){
+			cptb = 0;
+		}
 	}
 }
 //------------------------------------------------------------------------
