@@ -8,7 +8,10 @@
 #define FIRST_LVL_ADDR          0x48000
 #define SECON_LVL_ADDR          FIRST_LVL_ADDR + FIRST_LVL_SIZE
 
-uint32_t device_flags;
+uint32_t device_flags = 1079; //010000110111
+uint32_t* first_lvl_page = FIRST_LVL_ADDR;
 
-#define UPDATE_FLAG(x) ( (x >= 0x20000000 && x <= 0x20FFFFFF)? device_flags = x&4096 : device_flags = 0 )
+int init_kern_translation_table(void)
+{
 
+}
