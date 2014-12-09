@@ -1,5 +1,7 @@
 #define STACK_SIZE 2048
 #define NULL 0
+#define LISTECL_SIZE 4
+#define AGING_LIMIT 20
 
 
 typedef enum State State;
@@ -27,17 +29,20 @@ struct pcb_s{
 	State state;
 	void* address;
 	int priority;
+	int initial_priority;
+	int agingCpt;
 };
 
 struct chained_list{
 	int priority;
 	struct pcb_s* first_pcb;
 	struct pcb_s* last_pcb;
+	int size;
 };
 
 struct pcb_s* current_process;
 
-struct chained_list* listeCL [4];
+struct chained_list* listeCL [LISTECL_SIZE];
 struct chained_list priority0;
 struct chained_list priority1;
 struct chained_list priority2;
@@ -54,8 +59,12 @@ void create_process(funct_t f, void* args, unsigned int stack_size,int priority)
 
 void addToChainedList(struct pcb_s* new_pcb, struct chained_list* CL);
 
+void deleteFromChainedList(struct pcb_s* to_delete, struct chained_list* CL);
+
 void start_current_process();
 
 void terminate_process();
 
 void elect();
+
+void aging();
