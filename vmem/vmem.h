@@ -3,6 +3,7 @@
 
 #include "../types.h"
 
+// Translation
 #define ADDRESS_OFFSET			4096
 
 #define PAGE_SIZE 				4096
@@ -30,6 +31,11 @@
 
 #define SECOND_DESCRIPTOR(add)	(SECON_LVL_ADDR + 4*FIRST_INDEX(add)*SECON_LVL_TT_SIZE + 4*SECOND_INDEX(add))
 #define FIRST_DESCRIPTOR(add)	(FIRST_LVL_ADDR + 4*FIRST_INDEX(add))
+
+// Free pages
+#define FREE_PAGES_ADDR			FIRST_LVL_ADDR + TOTAL_TT_SIZE
+#define FREE_PAGES_COUN			1048576
+#define FREE_PAGES_SIZE			FREE_PAGES_COUN
 
 typedef uint32 uint32_t;
 

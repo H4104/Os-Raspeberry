@@ -1,0 +1,13 @@
+8.8
+Adressage physique -> 528 Mo
+512 de 0x0 à 0x2000000
+16 de 0x2000000 à 0x20FFFFFF pour les devices
+
+Adressage logique -> 4 Go ( 32 bits )
+
+8.9
+1 Mi lignes (1024*1024) -> 1 048 576
+
+8.10
+
+Juste après les indexes de second niveau
