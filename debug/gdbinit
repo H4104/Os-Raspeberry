@@ -2,5 +2,5 @@ layout split
 fs cmd
 wh cmd 12
 target remote:1234
-b vmem.c:69
+b kmain
 source include.gdb
