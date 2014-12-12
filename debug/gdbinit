@@ -2,6 +2,5 @@ layout split
 fs cmd
 wh cmd 12
 target remote:1234
-b kmain
-b ctx_switch_from_irq
+b vmem.c:69
 source include.gdb
