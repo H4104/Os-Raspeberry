@@ -1,52 +1,54 @@
 #include "../types.h"
 
-#define PAGE_SIZE 		4096
-#define SECON_LVL_TT_COUN	256
-#define SECON_LVL_TT_SIZE	4*SECON_LVL_TT_COUN
-#define FIRST_LVL_TT_COUN	4096
-#define FIRST_LVL_TT_SIZE	4*FIRST_LVL_TT_COUN
-#define TOTAL_TT_SIZE		(FIRST_LVL_TT_SIZE + SECON_LVL_TT_SIZE*FIRST_LVL_TT_COUN)
+#define PAGE_SIZE 				4096
+#define SECON_LVL_TT_COUN		256
+#define SECON_LVL_TT_SIZE		4*SECON_LVL_TT_COUN
+#define FIRST_LVL_TT_COUN		4096
+#define FIRST_LVL_TT_SIZE		4*FIRST_LVL_TT_COUN
+#define TOTAL_TT_SIZE			(FIRST_LVL_TT_SIZE + SECON_LVL_TT_SIZE*FIRST_LVL_TT_COUN)
 
-#define FIRST_LVL_ADDR          0x48000
-#define SECON_LVL_ADDR          FIRST_LVL_ADDR + FIRST_LVL_TT_SIZE
+#define FIRST_LVL_ADDR			0x48000
+#define SECON_LVL_ADDR			FIRST_LVL_ADDR + FIRST_LVL_TT_SIZE
 
-#define DEVICE_ADDR_BEGIN	0x20000000
-#define DEVICE_ADDR_END		0x20FFFFFF
+#define DEVICE_ADDR_BEGIN		0x20000000
+#define DEVICE_ADDR_END			0x20FFFFFF
 
-#define USER_SPACE_BEGIN	0x500000
+#define USER_SPACE_BEGIN		0x500000
 
-#define MASK12			4095
-#define FIRST20(x)		(x&(~4095))
-#define FIRST22(x)		(x&(~1024))
+#define MASK12					4095
+#define FIRST20(x)				(x&(~4095))
+#define FIRST22(x)				(x&(~1024))
 
-#define FIRST_INDEX(x)		(x>>20)
-#define SECOND_INDEX(x)		((x>>12)&255)
-#define PAGE_INDEX(x)		(x&4095)
+#define FIRST_INDEX(x)			(x>>20)
+#define SECOND_INDEX(x)			((x>>12)&255)
+#define PAGE_INDEX(x)			(x&4095)
 
-#define SEC_DESC_ADDR(x)	(SECON_LVL_ADDR + x*SECON_LVL_TT_SIZE)
+#define SEC_DESC_ADDR(x)		(SECON_LVL_ADDR + x*SECON_LVL_TT_SIZE)
 #define SECOND_DESCRIPTOR(add)	(SECON_LVL_ADDR + FIRST_INDEX(add)*SECON_LVL_TT_SIZE)
 #define FIRST_DESCRIPTOR(add)	(FIRST_LVL_ADDR + FIRST_INDEX(add))
 
+typedef uint32 uint32_t;
 
-uint32 device_flags = 1079; //010000110111
-uint32* first_level_entries;
+uint32_t device_flags = 1079; 	//010000110111
+uint32_t kernel_flags = 1138; 	//010001110010
+uint32_t* first_level_entries;
 
-void init_page_no_translation(uint32 address, uint32 sec_flag)
+void init_page_no_translation(uint32_t address, uint32_t sec_flag)
 {
-	uint32* first_level_descriptor = FIRST_DESCRIPTOR(address);
+	uint32_t* first_level_descriptor = (uint32_t*)FIRST_DESCRIPTOR(address);
 	if( (*first_level_descriptor & 3) == 0 )
 	{
 		// Ignored
 		*first_level_descriptor = FIRST22(SEC_DESC_ADDR(address)) | 1;
 	}
-	uint32* second_level_descriptor = SECOND_DESCRIPTOR(address);
+	uint32_t* second_level_descriptor = (uint32_t*)SECOND_DESCRIPTOR(address);
 	// no translation
 	*second_level_descriptor = FIRST20(address) | sec_flag;
 }
 
 int init_kern_translation_table(void)
 {
-	first_level_entries = FIRST_LVL_ADDR;
+	first_level_entries = (uint32_t*)FIRST_LVL_ADDR;
 
 	// On met toutes les entrées à Translation Fault
 	int i;
@@ -55,13 +57,13 @@ int init_kern_translation_table(void)
 		first_level_entries[i] = 0; // Deux derniers bits à 0
 	}
 	// A ce stade, on a aucune entrée dans la table
-	uint32* first;
-	uint32* second;
-	uint32 address = 0x0;
+	/*uint32_t* first;
+	uint32_t* second;
+	uint32_t address = 0x0;
 	int j;
 	for( i = 0; i < FIRST_LVL_TT_COUN; ++i)
 	{
-		uint32* second_level_entries = SECON_LVL_ADDR + i*SECON_LVL_TT_SIZE;
+		uint32_t* second_level_entries = SECON_LVL_ADDR + i*SECON_LVL_TT_SIZE;
 		// Coarse page table adress
 		// Les bits de poids fort de l'adresse des second level entries
 		first_level_entries[i] = ((SECON_LVL_ADDR + i*SECON_LVL_TT_SIZE)>>10)<<10;
@@ -74,7 +76,17 @@ int init_kern_translation_table(void)
 			}
 			address += PAGE_SIZE;
 		}
+	}*/
+
+	uint32_t address;
+	for( address = 0; address < USER_SPACE_BEGIN; ++address)
+	{
+		init_page_no_translation(address, kernel_flags);
+	}
+	for( address = DEVICE_ADDR_BEGIN; address < DEVICE_ADDR_BEGIN; ++address)
+	{
+		init_page_no_translation(address, device_flags);
 	}
 	
-	
+	return 0;
 }

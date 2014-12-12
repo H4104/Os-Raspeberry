@@ -68,11 +68,11 @@ int init_kern_translation_table(void)
 		first_level_entries[i] |= 1; // Flags
 		for( j = 0; j < SECON_LVL_TT_COUN; ++j)
 		{
-			if( address <= USER_SPACE_BEGIN || (adress >= DEVICE_ADDR_BEGIN && adress <= DEVICE_ADDR_END))
+			if( address <= USER_SPACE_BEGIN || (address >= DEVICE_ADDR_BEGIN && address <= DEVICE_ADDR_END))
 			{
-				second_level_entries[j] = adress;
+				second_level_entries[j] = address;
 			}
-			adress += PAGE_SIZE;
+			address += PAGE_SIZE;
 		}
 	}
 	

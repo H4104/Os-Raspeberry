@@ -21,9 +21,10 @@ void funcB(){
 //------------------------------------------------------------------------
 int kmain (void){
 	init_hw();
-	create_process(funcA, NULL, STACK_SIZE);
+	init_kern_translation_table();
+	/*create_process(funcA, NULL, STACK_SIZE);
 	create_process(funcB, NULL, STACK_SIZE);
-	start_sched();
+	start_sched();*/
 	while(1){}
 /* Pas atteignable vues nos 2 fonctions */
 	return 0;
