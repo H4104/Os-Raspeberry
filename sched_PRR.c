@@ -14,6 +14,7 @@ void init_pcb(struct pcb_s* pcb, funct_t f, unsigned int size, void* args){
 	pcb->pcb_f = f;
 	pcb->pcb_args = args;
 	struct ctx_s* ctx= phyAlloc_alloc(sizeof(struct ctx_s));
+	pcb->tempsAttente = 0;	
 	init_ctx(ctx,f,size);
 	pcb-> pcb_ctx= ctx;
 	pcb->state = NEW;
@@ -52,6 +53,10 @@ void terminate_process(){
 	while(proc->next_pcb != CL.first_pcb){
 		while(proc->next_pcb->state!=TERMINATED && proc->next_pcb != CL.first_pcb){
 			proc = proc->next_pcb;
+			if(proc==proc->next_pcb)
+			{
+				CL.first_pcb=proc;
+			}
 		}
 		if(proc->next_pcb->state==TERMINATED){
 			tmp = proc->next_pcb->next_pcb;
@@ -76,7 +81,9 @@ void terminate_process(){
 }
 
 void elect(){
-	current_process = current_process->next_pcb;
+	do{
+		current_process = current_process->next_pcb;
+	}while(current_process->tempsAttente>0 && current_process->state != TERMINATED);
 }
 
 void start_sched(){
@@ -91,6 +98,18 @@ void ctx_switch_from_irq(){
 	asm("srsdb sp!, #0x13");
 	asm("cps #0x13");
 	
+	struct pcb_s* tmp = current_process;
+	do
+	{
+		if((tmp->tempsAttente)>0)
+		{
+			(tmp->tempsAttente)--;
+		}
+		
+		tmp=(tmp->next_pcb);
+	}while(tmp != current_process);
+	tmp = CL.first_pcb;// Est nécessaire pour des raisons.
+	
 	if(current_process != NULL && current_process->state!=NEW){
 		asm("push {r0-r12}");
 		asm("mov %0, sp" : "=r"(current_process->pcb_ctx->sp));
@@ -99,7 +118,7 @@ void ctx_switch_from_irq(){
 	}
 	elect();
 	if(current_process->state == TERMINATED){
-		struct pcb_s* tmp = current_process;
+		tmp = current_process;
 		while(tmp->next_pcb->state == TERMINATED){
 			tmp = tmp->next_pcb;
 		}

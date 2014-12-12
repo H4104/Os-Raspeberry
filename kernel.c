@@ -1,11 +1,11 @@
 #include "sched_PRR.h"
 #include "hw.h"
-
-
+#include "syscall.h"
 
 void funcA() {
 	int	cptA = 0;
-	while( 1 ) {
+	sys_wait(3);
+	while(cptA<10) {
 		cptA ++;
 		if(cptA>1500000){
 			cptA = 0;
@@ -14,8 +14,7 @@ void funcA() {
 }
 void funcB(){
 	int	cptB = 1;
-	while( 1 ) {
-			cptB += 2 ;
+	while(cptB<10000000000) {
 			cptB += 2 ;
 			if(cptB>150000000){
 				cptB=0;

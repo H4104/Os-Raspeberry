@@ -3,5 +3,6 @@
 
 void sys_reboot();
 void SWIHandler();
+void sys_wait(unsigned int quantum);
 
 #endif

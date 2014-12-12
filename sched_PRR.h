@@ -21,6 +21,7 @@ struct pcb_s{
 	struct pcb_s* next_pcb;
 	void* pcb_args;
 	funct_t pcb_f;
+	unsigned int tempsAttente;	
 	struct ctx_s* pcb_ctx;
 	State state;
 	void* address;
