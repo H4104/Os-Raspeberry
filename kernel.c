@@ -1,4 +1,4 @@
-#include "sched.h"
+#include "sched_PPF.h"
 #include "hw.h"
 
 
@@ -21,12 +21,24 @@ void funcB(){
 		}
 	}
 }
+void funcC(){
+	int	cptC = 1;
+	while( 1 ) {
+		cptC ++;
+		if(cptC>15){
+			return;
+		}
+	}
+}
+
 //------------------------------------------------------------------------
 int kmain (void){
 	init_hw();
-	create_process(funcA, NULL, STACK_SIZE);
-	create_process(funcB, NULL, STACK_SIZE);
-	start_sched();
+	init_priority_list();
+	create_process(funcA, NULL, STACK_SIZE,0);
+	//create_process(funcB, NULL, STACK_SIZE,0);
+	//create_process(funcC, NULL, STACK_SIZE,1);
+	start_sched_PPF();
 	while(1){}
 /* Pas atteignable vues nos 2 fonctions */
 	return 0;

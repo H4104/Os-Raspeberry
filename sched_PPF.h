@@ -65,6 +65,8 @@ void start_current_process();
 
 void terminate_process();
 
+void init_priority_list();
+
 void elect();
 
 void aging();
