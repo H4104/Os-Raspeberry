@@ -5,7 +5,7 @@
 void funcA() {
 	int	cptA = 0;
 	sys_wait(3);
-	while(cptA<10) {
+	while(1) {
 		cptA ++;
 		if(cptA>1500000){
 			cptA = 0;
@@ -14,7 +14,7 @@ void funcA() {
 }
 void funcB(){
 	int	cptB = 1;
-	while(cptB<10000000000) {
+	while(1) {
 			cptB += 2 ;
 			if(cptB>150000000){
 				cptB=0;

@@ -80,8 +80,27 @@ void terminate_process(){
 	phyAlloc_free(pcb, sizeof(struct pcb_s));*/
 }
 
+void update_waiting()
+{
+	struct pcb_s* tmp = current_process;
+	do
+	{
+		if((tmp->tempsAttente)>0)
+		{
+			(tmp->tempsAttente)--;
+		}
+		
+		tmp=(tmp->next_pcb);
+	}while(tmp != current_process);
+}
+
 void elect(){
+	struct pcb_s* tmp = current_process;
 	do{
+		if(current_process==tmp)
+		{
+			update_waiting();
+		}
 		current_process = current_process->next_pcb;
 	}while(current_process->tempsAttente>0 && current_process->state != TERMINATED);
 }
@@ -98,17 +117,7 @@ void ctx_switch_from_irq(){
 	asm("srsdb sp!, #0x13");
 	asm("cps #0x13");
 	
-	struct pcb_s* tmp = current_process;
-	do
-	{
-		if((tmp->tempsAttente)>0)
-		{
-			(tmp->tempsAttente)--;
-		}
-		
-		tmp=(tmp->next_pcb);
-	}while(tmp != current_process);
-	tmp = CL.first_pcb;// Est nécessaire pour des raisons.
+	struct pcb_s* tmp;
 	
 	if(current_process != NULL && current_process->state!=NEW){
 		asm("push {r0-r12}");
