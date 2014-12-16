@@ -3,6 +3,8 @@
 
 #include "../types.h"
 
+#define NULL					0
+
 // Translation
 #define ADDRESS_OFFSET			4096
 
@@ -16,6 +18,7 @@
 #define FIRST_LVL_ADDR			0x48000
 #define SECON_LVL_ADDR			FIRST_LVL_ADDR + FIRST_LVL_TT_SIZE
 
+/*
 #define DEVICE_ADDR_BEGIN		0x20000000
 #define DEVICE_ADDR_END			0x20FFFFFF
 
@@ -36,15 +39,23 @@
 #define FREE_PAGES_ADDR			FIRST_LVL_ADDR + TOTAL_TT_SIZE
 #define FREE_PAGES_COUN			1048576
 #define FREE_PAGES_SIZE			FREE_PAGES_COUN
+*/
+typedef uint32 	uint32_t;
+typedef uint8 	uint8_t;
 
-typedef uint32 uint32_t;
-
-static void init_page_no_translation(uint32_t address, uint32_t sec_flag);
+void init_page_no_translation(uint32_t address, uint32_t sec_flag);
 
 int init_kern_translation_table(void);
 
 void start_mmu_C(void);
 
 void configure_mmu_C(void);
+
+uint8_t* vMem_Alloc( unsigned int nbPages );
+
+void vMem_Free( uint8_t* ptr, unsigned int nbPages );
+
+uint32_t new_first_table();
+uint32_t new_second_table();
 
 #endif
