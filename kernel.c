@@ -24,8 +24,16 @@ int kmain (void){
 	init_hw();
 	init_kern_translation_table();
 
-	//configure_mmu_C();
-	//start_mmu_C();
+	configure_mmu_C();
+	start_mmu_C();
+
+	uint32_t* pt = (uint32_t*)vMem_Alloc(1);
+	*pt = sizeof(uint32_t);
+
+	pt[1023] = 42;
+	pt[1024] = 43; // crashes :)
+
+	uint32_t* pt2 = (uint32_t*)vMem_Alloc(1);
 
 	/*create_process(funcA, NULL, STACK_SIZE);
 	create_process(funcB, NULL, STACK_SIZE);

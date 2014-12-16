@@ -21,6 +21,10 @@
 #define MASK12					4095
 #define FIRST20(x)				(((uint32_t)x)&(~4095))
 #define FIRST22(x)				(((uint32_t)x)&(~1023))
+
+#define FIRST_INDEX(x)			(x>>20)
+#define SECOND_INDEX(x)			((x>>12)&255)
+#define PAGE_INDEX(x)			(x&4095)
 /*
 #define DEVICE_ADDR_BEGIN		0x20000000
 #define DEVICE_ADDR_END			0x20FFFFFF
@@ -31,9 +35,6 @@
 #define FIRST20(x)				(x&(~4095))
 #define FIRST22(x)				(x&(~1023))
 
-#define FIRST_INDEX(x)			(x>>20)
-#define SECOND_INDEX(x)			((x>>12)&255)
-#define PAGE_INDEX(x)			(x&4095)
 
 #define SECOND_DESCRIPTOR(add)	(SECON_LVL_ADDR + 4*FIRST_INDEX(add)*SECON_LVL_TT_SIZE + 4*SECOND_INDEX(add))
 #define FIRST_DESCRIPTOR(add)	(FIRST_LVL_ADDR + 4*FIRST_INDEX(add))

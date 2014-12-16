@@ -3,5 +3,4 @@ fs cmd
 wh cmd 12
 target remote:1234
 b kmain
-b new_second_table
 source include.gdb
