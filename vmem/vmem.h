@@ -18,6 +18,9 @@
 #define FIRST_LVL_ADDR			0x48000
 #define SECON_LVL_ADDR			FIRST_LVL_ADDR + FIRST_LVL_TT_SIZE
 
+#define MASK12					4095
+#define FIRST20(x)				(((uint32_t)x)&(~4095))
+#define FIRST22(x)				(((uint32_t)x)&(~1023))
 /*
 #define DEVICE_ADDR_BEGIN		0x20000000
 #define DEVICE_ADDR_END			0x20FFFFFF
@@ -43,7 +46,7 @@
 typedef uint32 	uint32_t;
 typedef uint8 	uint8_t;
 
-void init_page_no_translation(uint32_t address, uint32_t sec_flag);
+void init_no_translation_pages(uint32_t* first_table);
 
 int init_kern_translation_table(void);
 
@@ -55,7 +58,7 @@ uint8_t* vMem_Alloc( unsigned int nbPages );
 
 void vMem_Free( uint8_t* ptr, unsigned int nbPages );
 
-uint32_t new_first_table();
-uint32_t new_second_table();
+uint32_t* new_first_table();
+uint32_t* new_second_table();
 
 #endif

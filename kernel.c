@@ -24,8 +24,8 @@ int kmain (void){
 	init_hw();
 	init_kern_translation_table();
 
-	configure_mmu_C();
-	start_mmu_C();
+	//configure_mmu_C();
+	//start_mmu_C();
 
 	/*create_process(funcA, NULL, STACK_SIZE);
 	create_process(funcB, NULL, STACK_SIZE);

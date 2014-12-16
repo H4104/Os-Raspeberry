@@ -5,7 +5,7 @@ uint32_t total;
 
 #define MINI_TABLE_ADDR			0x48000
 #define MINI_TABLE_COUN			0x2000
-#define	MINI_TABLE_GET_ADDR(n)	(FIRST_LVL_ADDR + 1024*n)
+#define	MINI_TABLE_GET_ADDR(n)	(TT_START_ADDR + 1024*n)
 #define NO_MORE_SPACE			0
 
 #define OCCP_TABLE_ADDR			0x50000
@@ -45,14 +45,39 @@ int init_kern_translation_table(void)
 	init_no_translation_pages(kernel_tt_address);
 
 	// todo : init_no_translation_pages
+	return 0;
 }
 
-void init_no_translation_pages(uint32_t* first_table_address)
+void init_no_translation_pages(uint32_t* first_table)
+// adresses 0x0 to 0x50000 = 5mega
+// A first level descriptor can handle 4096*256 = 1mega = 1048576 adresses 
+// so we need to fill 5 descriptors
 {
+	int i;
+	for( i = 0; i < 5; ++i)
+	{
+		uint32_t* second_table = new_second_table();
+		first_table[i] = FIRST22(second_table) | 1;
 
+		int j;
+		for( j = 0; j < SECON_LVL_TT_COUN; ++j)
+		{
+			second_table[j] = FIRST20(i*0x100000+j*PAGE_SIZE) | kernel_flags;
+		}
+	}
+	for( i = 0; i < 16; ++i) // 16*0x100 000 to get 0x1 000 000
+	{
+		uint32_t* second_table = new_second_table();
+		first_table[i+5] = FIRST22(second_table) | 1;
+		int j;
+		for( j = 0; j < SECON_LVL_TT_COUN; ++j)
+		{
+			second_table[j] = FIRST20(0x20000000+i*0x100000+j*PAGE_SIZE) | device_flags;
+		}
+	}
 }
 
-uint32_t new_first_table()
+uint32_t* new_first_table()
 {
 	int i;
 	int j;
@@ -72,7 +97,7 @@ uint32_t new_first_table()
 				{
 					mini_table[i+k] = 1;
 				}
-				return MINI_TABLE_GET_ADDR(i);
+				return (uint32_t*)MINI_TABLE_GET_ADDR(i);
 			}
 		}
 		
@@ -81,7 +106,7 @@ uint32_t new_first_table()
 	return NO_MORE_SPACE;
 }
 
-uint32_t new_second_table()
+uint32_t* new_second_table()
 {
 	int i;
 	for( i = 0; i < MINI_TABLE_COUN; ++i)
@@ -89,7 +114,7 @@ uint32_t new_second_table()
 		if(mini_table[i] == 0)
 		{
 			mini_table[i] = 1;
-			return MINI_TABLE_GET_ADDR(i);
+			return (uint32_t*)MINI_TABLE_GET_ADDR(i);
 		}
 	}
 	// If we are here, then the current process should be shut down
