@@ -1,7 +1,9 @@
+#include <stdint.h>
+
 #define STACK_SIZE 2048
 #define NULL 0
 #define LISTECL_SIZE 4
-#define AGING_LIMIT 5
+#define AGING_LIMIT 3
 
 
 typedef enum State State;
@@ -16,9 +18,9 @@ enum State
 };
 
 struct ctx_s{
-	void* sp;
-	void* pc;
-	void* init_sp;
+	uint32_t* sp;
+	funct_t pc;
+	uint32_t* stack_base;
 };
 
 struct pcb_s{

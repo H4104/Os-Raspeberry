@@ -2,10 +2,16 @@
 #include "phyAlloc.h"
 #include "hw.h"
 
+struct pcb_s pcb_init;
+
 void init_ctx(struct ctx_s* context, funct_t f, unsigned int size)
 {
-	context->init_sp = phyAlloc_alloc(size);
-	context->sp = context->init_sp + STACK_SIZE-4;
+	context->stack_base = (uint32_t*) phyAlloc_alloc(size);
+	context->sp = context->stack_base + (STACK_SIZE / 4) - 1;
+	*(context->sp) = (uint32_t) 0x13;
+	context->sp -= 1;
+	*(context->sp) = (uint32_t) &start_current_process;
+	context->sp -= 14;
 	context->pc = f;
 }
 
@@ -53,8 +59,9 @@ void start_current_process()
 	ENABLE_IRQ();
 	set_tick_and_enable_timer();
 	current_process->pcb_f();
-	DISABLE_IRQ();
 	current_process->state = TERMINATED;
+	while(1)
+		;
 }
 
 void terminate_process()
@@ -83,8 +90,8 @@ void terminate_process()
 						listeCL[i]->last_pcb=proc;
 					}
 					tmp = proc->next_pcb->next_pcb;
-					
-					phyAlloc_free(proc->next_pcb->pcb_ctx->init_sp,STACK_SIZE);
+					listeCL[i]->size--;
+					phyAlloc_free(proc->next_pcb->pcb_ctx->stack_base,STACK_SIZE);
 					phyAlloc_free(proc->next_pcb->pcb_ctx,sizeof(struct ctx_s));
 					phyAlloc_free(proc->next_pcb, sizeof(struct pcb_s));
 					proc->next_pcb = tmp;
@@ -92,20 +99,19 @@ void terminate_process()
 			}
 			if(proc->next_pcb == proc && proc->state == TERMINATED)
 			{
-				listeCL[i]->size--;
-				phyAlloc_free(proc->pcb_ctx->init_sp,STACK_SIZE);
+				listeCL[i]->size=0;
+				phyAlloc_free(proc->pcb_ctx->stack_base,STACK_SIZE);
 				phyAlloc_free(proc->pcb_ctx,sizeof(struct ctx_s));
 				phyAlloc_free(proc, sizeof(struct pcb_s));
 			}
 		}
 		
 	}
-	
-	
 }
 
 void elect()
 {
+	
 	if(current_process->priority == 0 && current_process->next_pcb !=current_process && current_process->next_pcb->state != TERMINATED)
 	{
 		if(current_process->state != TERMINATED)
@@ -176,7 +182,7 @@ void aging()
 				}
 				if(i != 0)
 				{
-					if(tmp->next_pcb->agingCpt < AGING_LIMIT)
+					if(tmp->next_pcb->agingCpt < 3)
 					{
 						tmp->next_pcb->agingCpt++;
 					}
@@ -218,6 +224,8 @@ void init_priority_list()
 
 void start_sched_PPF()
 {
+	pcb_init.next_pcb = listeCL[0]->first_pcb;
+	current_process = &pcb_init;
 	ENABLE_IRQ();
 	set_tick_and_enable_timer();
 }
@@ -229,31 +237,26 @@ void ctx_switch_from_irq()
 	asm("sub lr, lr, #4");
 	asm("srsdb sp!, #0x13");
 	asm("cps #0x13");
-	if(current_process != NULL && current_process->state!=NEW){
-		asm("push {r0-r12}");
-		asm("mov %0, sp" : "=r"(current_process->pcb_ctx->sp));
-		asm("mov %0, lr" : "=r"(current_process->pcb_ctx->pc));
-		current_process->state=JUST_WAITING;
-		aging();
-	}
+	asm("push {r0-r12, lr}");
+
+	asm("mov %0, sp" : "=r"(current_process->pcb_ctx->sp));
+
+	current_process->state = JUST_WAITING;
+	aging();
 	elect();
-	while(current_process->state == NEW)
-	{
-		start_current_process();
-		elect();
-		terminate_process();
-	}
+	terminate_process();
+
 	if(current_process->state == WAITING){
 		current_process->state = RUNNING;
 	}
-	
-	
+		
 	asm("mov sp, %0" : : "r"(current_process->pcb_ctx->sp));
-	asm("mov lr, %0" : : "r"(current_process->pcb_ctx->pc));
-	asm("pop {r0-r12}");
+
+	set_tick_and_enable_timer();
+
+	asm("pop {r0-r12, lr}");
 	
 	ENABLE_IRQ();
-	set_tick_and_enable_timer();
 	asm("rfeia sp!");
 
 }

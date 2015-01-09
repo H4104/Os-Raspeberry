@@ -37,7 +37,7 @@ int kmain (void){
 	init_priority_list();
 	create_process(funcA, NULL, STACK_SIZE,0);
 	create_process(funcB, NULL, STACK_SIZE,0);
-	//create_process(funcC, NULL, STACK_SIZE,0);
+	create_process(funcC, NULL, STACK_SIZE,1);
 	start_sched_PPF();
 	while(1){}
 /* Pas atteignable vues nos 2 fonctions */
