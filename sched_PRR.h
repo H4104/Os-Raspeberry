@@ -1,3 +1,4 @@
+#include <stdint.h>
 
 #define STACK_SIZE 2048
 #define NULL 0
@@ -12,9 +13,9 @@ enum State
 };
 
 struct ctx_s{
-	void* sp;
-	void* pc;
-	void* init_sp;
+	uint32_t* sp;
+	funct_t pc;
+	uint32_t* stack_base;
 };
 
 struct pcb_s{
@@ -36,7 +37,7 @@ struct chained_list{
 struct pcb_s* current_process;
 struct chained_list CL;
 
-void init_pcb(struct pcb_s* context, funct_t f, unsigned int size, void* args, int priority );
+void init_pcb(struct pcb_s* context, funct_t f, unsigned int size, void* args );
 
 //void __attribute__ ((naked)) switch_to(struct ctx_s* context);
 
@@ -46,7 +47,7 @@ void ctx_switch_from_irq();
 
 void init_ctx(struct ctx_s* context, funct_t f, unsigned int size);
 
-void create_process(funct_t f, void* args, unsigned int stack_size, int priority);
+void create_process(funct_t f, void* args, unsigned int stack_size);
 
 void start_current_process();
 
