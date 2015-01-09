@@ -28,10 +28,20 @@ int kmain (void){
 	start_mmu_C();
 
 	uint32_t* pt = (uint32_t*)vMem_Alloc(1);
-	*pt = sizeof(uint32_t);
+	//*pt = sizeof(uint32_t);
+	//uint32_t* pt = 0x500000;
 
 	pt[1023] = 42;
-	pt[1024] = 43; // crashes :)
+
+	vMem_Free(pt,1);
+
+	pt = (uint32_t*)vMem_Alloc(1);
+
+	pt[0] = 50;
+
+	vMem_Free(pt,1);
+
+	pt[0] = 48;
 
 	uint32_t* pt2 = (uint32_t*)vMem_Alloc(1);
 
