@@ -33,6 +33,7 @@
 void enable_timer_irq();
 void disable_timer_irq();
 void set_tick_and_enable_timer();
+void set_tick_and_enable_timer_TS(int priority);
 
 void led_off();
 void led_on();

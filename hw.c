@@ -13,7 +13,10 @@
 #define GPSET0  0x2020001C
 #define GPCLR0  0x20200028
 
-#define INTERVAL 0x00080000
+#define INTERVAL3 0x00080000
+#define INTERVAL2 0x00100000
+#define INTERVAL1 0x00200000
+#define INTERVAL0 0x00400000
 
 extern void PUT32 ( unsigned int, unsigned int );
 extern unsigned int GET32 ( unsigned int );
@@ -24,11 +27,32 @@ extern unsigned int GET32 ( unsigned int );
 #define ENABLE_TIMER_IRQ() PUT32(CS,2)
 #define DISABLE_TIMER_IRQ() PUT32(CS,~2);
 
-void
-set_tick_and_enable_timer()
+void set_tick_and_enable_timer()
 {
   unsigned int rx = GET32(CLO);
-  rx += INTERVAL;
+  rx += INTERVAL3;
+  PUT32(C1,rx);
+
+  ENABLE_TIMER_IRQ();
+}
+
+void set_tick_and_enable_timer_TS(int priority)
+{
+  unsigned int rx = GET32(CLO);
+  switch (priority){
+	  case 0 :
+		rx+=INTERVAL0;
+		break;
+	  case 1 :
+		rx+=INTERVAL1;
+		break;
+	  case 2 :
+		rx+=INTERVAL2;
+		break;
+	  case 3 :
+		rx+=INTERVAL3;
+		break;
+	}
   PUT32(C1,rx);
 
   ENABLE_TIMER_IRQ();
@@ -71,7 +95,7 @@ init_hw()
     
     /* Set up delay before timer interrupt (we use CM1) */
     rx=GET32(CLO);
-    rx += INTERVAL;
+    rx += INTERVAL3;
     PUT32(C1,rx);
     
     /* Enable irq triggering by the *system timer* peripheral */
