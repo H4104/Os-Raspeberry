@@ -64,7 +64,7 @@ void terminate_process()
 	int i;
 	for(i = 0 ; i < LISTECL_SIZE ; i++)
 	{
-		if(listeCL[i]->size != 0)
+		if(listeCL[i]->size > 0)
 		{
 			proc = listeCL[i]->first_pcb;
 			while(proc->next_pcb != listeCL[i]->first_pcb)
@@ -83,7 +83,7 @@ void terminate_process()
 						listeCL[i]->last_pcb=proc;
 					}
 					tmp = proc->next_pcb->next_pcb;
-					listeCL[i]->size--;
+					
 					phyAlloc_free(proc->next_pcb->pcb_ctx->init_sp,STACK_SIZE);
 					phyAlloc_free(proc->next_pcb->pcb_ctx,sizeof(struct ctx_s));
 					phyAlloc_free(proc->next_pcb, sizeof(struct pcb_s));
@@ -108,6 +108,10 @@ void elect()
 {
 	if(current_process->priority == 0 && current_process->next_pcb !=current_process && current_process->next_pcb->state != TERMINATED)
 	{
+		if(current_process->state != TERMINATED)
+		{
+			current_process->state = WAITING;
+		}
 		current_process = current_process->next_pcb;
 		return;
 	}else{
@@ -116,6 +120,10 @@ void elect()
 		{
 			if(listeCL[i]->size ==1 && listeCL[i]->first_pcb->state != JUST_WAITING && listeCL[i]->first_pcb->state != TERMINATED)
 			{
+				if(current_process->state != TERMINATED)
+				{
+					current_process->state = WAITING;
+				}
 				current_process = listeCL[i]->first_pcb;
 				return;
 			}else if(listeCL[i]->size>1)
@@ -125,6 +133,11 @@ void elect()
 				{
 					if(tmp->state != JUST_WAITING && tmp->state != TERMINATED)
 					{
+						if(current_process->state != TERMINATED)
+						{
+							current_process->state = WAITING;
+						}
+
 						current_process = tmp;
 						return;
 					}else
@@ -142,8 +155,6 @@ void elect()
 
 void aging()
 {
-	
-	//TODO virer JustWaitinh
 	int i;
 	for(i=0;i<LISTECL_SIZE;i++)
 	{
@@ -154,7 +165,7 @@ void aging()
 			{
 				if(tmp->next_pcb->state==JUST_WAITING )
 				{
-					tmp->next_pcb->state=WAITING;
+					
 					if(tmp->next_pcb->priority != tmp->next_pcb->initial_priority)
 					{
 						deleteFromChainedList(tmp->next_pcb,listeCL[i]);
@@ -187,16 +198,20 @@ void aging()
 
 void init_priority_list()
 {
-	listeCL[0] = &priority0;
+	priority0 = phyAlloc_alloc( sizeof(struct chained_list));
+	listeCL[0] = priority0;
 	listeCL[0]->priority = 0;
 	listeCL[0]->size = 0;
-	listeCL[1] = &priority1;
+	priority1 = phyAlloc_alloc( sizeof(struct chained_list));
+	listeCL[1] = priority1;
 	listeCL[1]->priority = 1;
 	listeCL[1]->size = 0;
-	listeCL[2] = &priority2;
+	priority2 = phyAlloc_alloc( sizeof(struct chained_list));
+	listeCL[2] = priority2;
 	listeCL[2]->priority = 2;
 	listeCL[2]->size = 0;
-	listeCL[3] = &priority3;
+	priority3 = phyAlloc_alloc( sizeof(struct chained_list));
+	listeCL[3] = priority3;
 	listeCL[3]->priority = 3;
 	listeCL[3]->size = 0;
 }
@@ -209,12 +224,11 @@ void start_sched_PPF()
 
 void ctx_switch_from_irq()
 {
-	static int cpt = 0;
+	//static int cpt = 0;
 	DISABLE_IRQ();
 	asm("sub lr, lr, #4");
 	asm("srsdb sp!, #0x13");
 	asm("cps #0x13");
-	//TODO le reste au milieu
 	if(current_process != NULL && current_process->state!=NEW){
 		asm("push {r0-r12}");
 		asm("mov %0, sp" : "=r"(current_process->pcb_ctx->sp));
@@ -222,17 +236,12 @@ void ctx_switch_from_irq()
 		current_process->state=JUST_WAITING;
 		aging();
 	}
-	cpt++;
 	elect();
-	if(cpt == 5)
-	{
-		cpt = 0;
-		terminate_process();
-	}
 	while(current_process->state == NEW)
 	{
 		start_current_process();
 		elect();
+		terminate_process();
 	}
 	if(current_process->state == WAITING){
 		current_process->state = RUNNING;

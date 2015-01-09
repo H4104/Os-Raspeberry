@@ -1,7 +1,7 @@
 #define STACK_SIZE 2048
 #define NULL 0
 #define LISTECL_SIZE 4
-#define AGING_LIMIT 20
+#define AGING_LIMIT 5
 
 
 typedef enum State State;
@@ -43,10 +43,10 @@ struct chained_list{
 struct pcb_s* current_process;
 
 struct chained_list* listeCL [LISTECL_SIZE];
-struct chained_list priority0;
-struct chained_list priority1;
-struct chained_list priority2;
-struct chained_list priority3;
+struct chained_list* priority0;
+struct chained_list* priority1;
+struct chained_list* priority2;
+struct chained_list* priority3;
 
 
 void start_sched_PPF();
