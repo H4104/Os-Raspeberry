@@ -181,8 +181,11 @@ void start_mmu_C(void)
 
 void configure_mmu_C(void)
 {
-	register unsigned int pt_addr = (unsigned int)kernel_tt_address;
+	register unsigned int pt_addr = (unsigned int)current_first_table;
 	total++;
+
+	__asm("mcr p15, 0, r0, c8, c7, 0"); //Invalidate TLB entries
+	
 	// Translation table 0 
 	__asm volatile("mcr p15, 0, %[addr], c2, c0, 0" : : [addr] "r" (pt_addr));
 	// Translation table 1 
@@ -194,8 +197,6 @@ void configure_mmu_C(void)
 	//
 	__asm volatile("mcr p15, 0, %[r], c3, c0, 0" : : [r] "r" (0x3));
 }
-
-
 
 uint8_t* new_frame()
 {
