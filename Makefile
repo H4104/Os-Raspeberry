@@ -4,7 +4,7 @@ CFLAGS = -Wall -nostdlib -fomit-frame-pointer -mno-apcs-frame -nostartfiles -ffr
 ASFLAGS = -g -march=armv6z
 
 
-C_FILES=kernel.c phyAlloc.c hw.c sched_PRR.c syscall.c
+C_FILES=kernel.c phyAlloc.c hw.c sched_PTS.c syscall.c
 
 AS_FILES=vectors.s
 

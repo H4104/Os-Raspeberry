@@ -1,4 +1,4 @@
-#include "sched_PRR.h"
+#include "sched_PTS.h"
 #include "hw.h"
 #include "syscall.h"
 
@@ -33,9 +33,9 @@ void functC(){
 //------------------------------------------------------------------------
 int kmain (void){
 	init_hw();
-	create_process(funcA, NULL, STACK_SIZE);
-	create_process(funcB, NULL, STACK_SIZE);
-	create_process(functC,NULL,STACK_SIZE);
+	create_process(funcA, NULL, STACK_SIZE,0);
+	create_process(funcB, NULL, STACK_SIZE,0);
+	create_process(functC,NULL,STACK_SIZE,1);
 	start_sched();
 	while(1){}
 /* Pas atteignable vues nos 2 fonctions */
