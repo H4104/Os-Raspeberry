@@ -6,7 +6,7 @@
 
 void funcA() {
 	int	cptA = 0;
-	//sys_wait(3);
+	sys_wait(3);
 	while(1) {
 		cptA ++;
   		uart_send_str("funcA\n"); 
