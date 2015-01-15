@@ -1,4 +1,3 @@
-#include "sched_PTS.h"
 #include "hw.h"
 #include "vmem/vmem.h"
 #include "syscall.h"
@@ -52,4 +51,5 @@ int kmain (void){
 	while(1){}
 /* Pas atteignable vues nos 2 fonctions */
 	return 0;
+  
 }
