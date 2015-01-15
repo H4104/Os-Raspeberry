@@ -1,0 +1,38 @@
+8.8
+Adressage physique -> 528 Mo
+512 de 0x0 à 0x2000000
+16 de 0x2000000 à 0x20FFFFFF pour les devices
+
+Adressage logique -> 4 Go ( 32 bits )
+
+8.9
+1 Mi lignes (1024*1024) -> *4096 octets par pages -> 4Go
+
+(C'est exactement ce qu'on peut faire avec 256 tables par second niveau pour 4096 seconds niveaux par premier niveau... tiens donc !)
+
+8.10
+
+Juste après les indexes de second niveau
+
+
+malloc pour les frames
+vmem malloc
+malloc tables de traduction
+
+64 tables de premier niveau
+
+/////////////////////
+
+On découpe l'espace entre 0x48000 et 0x500000 en paquets de 1024 octets (soit l'espace d'une entr)
+
+//////////////// 0x500000
+/
+/--------------
+/ first pc2
+/---------------
+/ second pc1
+/---------------
+/ first pc1
+/---------------
+/ mini_table
+//////////////// 0x48000
