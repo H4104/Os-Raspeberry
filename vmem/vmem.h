@@ -44,6 +44,7 @@
 #define FREE_PAGES_COUN			1048576
 #define FREE_PAGES_SIZE			FREE_PAGES_COUN
 */
+
 typedef uint32 	uint32_t;
 typedef uint8 	uint8_t;
 
