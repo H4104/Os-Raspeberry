@@ -81,6 +81,14 @@ GETPC:
     mov r0,lr
     bx lr
 
+.globl DELAY
+DELAY:
+    sub r0, r0, #3
+    cmp r0, #0
+    bgt DELAY
+    bx lr
+    
+
 .globl BRANCHTO
 BRANCHTO:
     bx r0
