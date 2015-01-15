@@ -2,6 +2,7 @@
 #define __VMEMH__
 
 #include "../types.h"
+#include <stdint.h>
 
 #define NULL					0
 
@@ -45,8 +46,6 @@
 #define FREE_PAGES_SIZE			FREE_PAGES_COUN
 */
 
-typedef uint32 	uint32_t;
-typedef uint8 	uint8_t;
 
 void init_no_translation_pages(uint32_t* first_table);
 

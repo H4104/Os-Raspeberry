@@ -4,7 +4,7 @@ CFLAGS = -Wall -nostdlib -fomit-frame-pointer -mno-apcs-frame -nostartfiles -ffr
 ASFLAGS = -g -march=armv6z 
 
 
-C_FILES=kernel.c phyAlloc.c hw.c sched_PTS.c syscall.c vmem/vmem.c uart.c pwm.c
+C_FILES=kernel.c phyAlloc.c hw.c sched_PTS.c syscall.c vmem/vmem.c uart.c 
 
 AS_FILES=vectors.s
 
@@ -26,9 +26,6 @@ clean :
 	rm -f *.clang.opt.s
 	rm -f *~
 
-tune.o : tune.wav
-	$(CC)-ld -s -r -o $@ -b binary $^
-
 %.o : %.c
 	$(ARMGNU)-gcc $(CFLAGS) -c $< -o $@
 
@@ -36,7 +33,7 @@ tune.o : tune.wav
 	$(ARMGNU)-as $(ASFLAGS) $< -o $@
 
 kernel : memmap $(OBJS)
-	$(ARMGNU)-ld $(OBJS) tune.o -T memmap -o kernel.elf
+	$(ARMGNU)-ld $(OBJS) -T memmap -o kernel.elf
 	$(ARMGNU)-objdump -D kernel.elf > kernel.list
 	$(ARMGNU)-objcopy kernel.elf -O binary kernel.img
 	$(ARMGNU)-objcopy kernel.elf -O ihex kernel.hex

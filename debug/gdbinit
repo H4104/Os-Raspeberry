@@ -3,4 +3,7 @@ fs cmd
 wh cmd 12
 target remote:1234
 b kmain
+b funcA
+b funcB
+b funcC
 source include.gdb
