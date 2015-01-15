@@ -1,43 +1,34 @@
-#include "sched_PTS.h"
 #include "hw.h"
-#include "syscall.h"
+// #include "sched.h"
+// #include "syscall.h"
+#include "bonus/Framebuffer/fb.h"
 
-void funcA() {
-	int	cptA = 0;
-	//sys_wait(3);
-	while(1) {
-		cptA ++;
-		if(cptA>1500000){
-			cptA = 0;
-		}
-	}
-}
-void funcB(){
-	int	cptB = 1;
-	while(1) {
-			cptB += 2 ;
-			if(cptB>150000000){
-				cptB=0;
-			}
-	}
-}
-
-void functC(){
-	int cptC = 0;
-	if(cptC == 15){
-		return;
-	}else{
-		cptC++;
-	}
-}
+// void funcA() {
+//   int cptA = 0;
+//   while ( 1 ) {
+//     cptA ++;
+// //     switch_to();
+//   }
+// }
+// 
+// void funcB() {
+//   sys_reboot();
+// }
 //------------------------------------------------------------------------
-int kmain (void){
-	init_hw();
-	create_process(funcA, NULL, STACK_SIZE,0);
-	create_process(funcB, NULL, STACK_SIZE,0);
-	create_process(functC,NULL,STACK_SIZE,1);
-	start_sched();
-	while(1){}
-/* Pas atteignable vues nos 2 fonctions */
-	return 0;
+int kmain ( void ) {
+  init_hw();
+//   start_sched();
+//   
+//   sys_wait(10);
+//   
+//   create_process(funcB, NULL);
+//   create_process(funcA, NULL);
+// 
+//   while(1);
+  FramebufferInitialize();
+  /* Pas atteignable vues nos 2 fonctions */
+  draw();
+  
+  while(1) { drawRed();drawBlue(); }
+  return 0;
 }
