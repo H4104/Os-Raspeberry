@@ -30,7 +30,7 @@ extern unsigned int GET32 ( unsigned int );
 void set_tick_and_enable_timer()
 {
   unsigned int rx = GET32(CLO);
-  rx += INTERVAL3;
+  rx += INTERVAL2;
   PUT32(C1,rx);
 
   ENABLE_TIMER_IRQ();

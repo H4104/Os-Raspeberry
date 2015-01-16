@@ -63,6 +63,7 @@ int kmain (void){
 	
 	/*-- start --*/
 	start_sched();
+
 	while(1){}
 	/* Pas atteignable vues nos 2 fonctions */
 	return 0;

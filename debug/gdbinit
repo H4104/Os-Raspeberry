@@ -5,5 +5,5 @@ target remote:1234
 b kmain
 b funcA
 b funcB
-b funcC
+b functC
 source include.gdb

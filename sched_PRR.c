@@ -38,6 +38,7 @@ void create_process(funct_t f, void* args, unsigned int stack_size){
 	}
 }
 
+<<<<<<< HEAD
 void start_current_process(){ 
 	ENABLE_IRQ(); 
 	set_tick_and_enable_timer();
